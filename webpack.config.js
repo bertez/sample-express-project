@@ -31,12 +31,7 @@ module.exports = {
         }),
         new webpack.ResolverPlugin([
             new webpack.ResolverPlugin.DirectoryDescriptionFilePlugin('bower.json', ['main'])
-        ]),
-        new webpack.ProvidePlugin({
-            jQuery: 'jquery',
-            $: 'jquery',
-            'window.jQuery': 'jquery'
-        })
+        ])
     ],
     node: {
         fs: 'empty'

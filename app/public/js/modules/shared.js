@@ -1,3 +1,12 @@
 'use strict';
 
-console.log('shared');
+const $ = require('jquery');
+
+if(DEVELOPMENT) {
+    window.$ = $;
+}
+
+if(PRODUCTION) {
+    //Production
+}
+

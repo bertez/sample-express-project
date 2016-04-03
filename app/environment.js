@@ -4,13 +4,12 @@ const path = require('path');
 
 const express = require('express');
 const exphbs = require('express-handlebars');
-const favicon = require('serve-favicon');
 const compression = require('compression');
 const logger = require('morgan');
 
-const routes = require('../app/routes');
+const routes = require('./routes');
 
-const viewHelpers = require('../app/lib/view-helpers');
+const viewHelpers = require('./lib/view-helpers');
 
 module.exports = function(app) {
 
@@ -53,21 +52,22 @@ module.exports = function(app) {
      * Static
      */
 
-    app.use(express.static(path.join(appRoot, 'dist')));
-
-
-    /**
-     * Favicon
-     */
-
-    app.use(favicon(path.join(appRoot, 'dist/img', 'favicon.ico')));
+    if(env ===  'development') {
+        app.use('/static', express.static(path.join(appRoot, 'dist')));
+    }
 
     /**
      * Routes
      */
 
     app.use(function(req, res, next) {
-        res.locals.name = 'Project name';
+        res.locals.info = {
+            name: 'Project name',
+            url: 'http://localhost',
+            description: 'Project description',
+            image: '/static/img/image.png'
+
+        };
         return next();
     });
 
